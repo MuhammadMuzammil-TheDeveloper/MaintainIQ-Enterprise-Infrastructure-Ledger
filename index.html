@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaintainIQ — Enterprise Infrastructure Ledger</title>
+    <!-- Bootstrap 5 CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           PREMIUM SAAS DESIGN SYSTEM — MaintainIQ
+           ═══════════════════════════════════════════════════════════ */
+
+        :root {
+            --miq-primary: #2563EB;
+            --miq-primary-hover: #1d4ed8;
+            --miq-primary-light: rgba(37, 99, 235, 0.08);
+            --miq-primary-glow: rgba(37, 99, 235, 0.15);
+            --miq-accent: #4F46E5;
+            --miq-accent-hover: #4338ca;
+            --miq-bg: #F8FAFC;
+            --miq-card: #FFFFFF;
+            --miq-surface: #F1F5F9;
+            --miq-border: #E2E8F0;
+            --miq-border-light: #F1F5F9;
+            --miq-text: #0F172A;
+            --miq-text-secondary: #475569;
+            --miq-text-muted: #94A3B8;
+            --miq-success: #10B981;
+            --miq-warning: #F59E0B;
+            --miq-danger: #EF4444;
+            --miq-info: #3B82F6;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -4px rgba(0,0,0,0.03);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.03);
+            --shadow-glow: 0 0 0 3px var(--miq-primary-glow);
+
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--miq-bg);
+            min-height: 100vh;
+            color: var(--miq-text);
+            letter-spacing: -0.011em;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           ANIMATIONS & KEYFRAMES
+           ═══════════════════════════════════════════════════════════ */
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes badgePop {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes toastSlideIn {
+            from { opacity: 0; transform: translateX(100%) scale(0.9); }
+            to { opacity: 1; transform: translateX(0) scale(1); }
+        }
+
+        @keyframes modalBackdropIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalContentIn {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes skeletonShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes navIndicator {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        @keyframes progressFill {
+            from { width: 0; }
+        }
+
+        @keyframes rowHighlight {
+            0% { background-color: rgba(37, 99, 235, 0.08); }
+            100% { background-color: transparent; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           GLASSMORPHISM & CARDS
+           ═══════════════════════════════════════════════════════════ */
+
+        .glass-card {
+            background: var(--miq-card);
+            border: 1px solid var(--miq-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            pointer-events: none;
+        }
+
+        .glass-card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-2px);
+        }
+
+        .glass-card-elevated {
+            background: var(--miq-card);
+            border: 1px solid var(--miq-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-base);
+        }
+
+        .glass-card-elevated:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-3px);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           AUTHENTICATION PAGE
+           ═══════════════════════════════════════════════════════════ */
+
+        #auth-view {
+            position: relative;
+            min-height: 100vh;
+            background: 
+                radial-gradient(ellipse at 10% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(79, 70, 229, 0.05) 0%, transparent 50%),
+                var(--miq-bg);
+        }
+
+        #auth-view::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(37, 99, 235, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(79, 70, 229, 0.03) 0%, transparent 40%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--miq-border);
+            border-radius: var(--radius-xl);
+            box-shadow: 
+                0 20px 60px -15px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-logo-container {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--miq-primary), var(--miq-accent));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+            animation: fadeInUp 0.5s 0.1s both, pulse-glow 3s ease-in-out infinite 1s;
+        }
+
+        .auth-logo-container i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .auth-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--miq-text), var(--miq-text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-subtitle {
+            color: var(--miq-text-muted);
+            font-size: 0.875rem;
+            font-weight: 400;
+        }
+
+        /* Toggle Buttons */
+        .btn-group.auth-toggle {
+            background: var(--miq-surface);
+            border-radius: var(--radius-md);
+            padding: 4px;
+            border: 1px solid var(--miq-border);
+        }
+
+        .btn-group.auth-toggle .btn {
+            border-radius: var(--radius-sm) !important;
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.625rem 1.25rem;
+            border: none !important;
+            color: var(--miq-text-secondary);
+            background: transparent;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-group.auth-toggle .btn:hover {
+            color: var(--miq-text);
+            background: rgba(255,255,255,0.5);
+        }
+
+        .btn-group.auth-toggle .btn.active {
+            background: var(--miq-card) !important;
+            color: var(--miq-primary) !important;
+            box-shadow: var(--shadow-sm) !important;
+            font-weight: 600;
+        }
+
+        .btn-group.auth-toggle .btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: var(--miq-primary);
+            border-radius: 2px;
+            animation: navIndicator 0.3s ease forwards;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FORM ELEMENTS
+           ═══════════════════════════════════════════════════════════ */
+
+        .form-control, .form-select {
+            border: 1.5px solid var(--miq-border) !important;
+            border-radius: var(--radius-md);
+            color: var(--miq-text);
+            font-size: 0.9375rem;
+            font-weight: 400;
+            padding: 0.75rem 1rem;
+            background: var(--miq-card);
+            transition: all var(--transition-fast);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .form-control:hover, .form-select:hover {
+            border-color: #CBD5E1 !important;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--miq-primary) !important;
+            box-shadow: var(--shadow-glow) !important;
+            background: var(--miq-card);
+            transform: translateY(-1px);
+        }
+
+        .form-control::placeholder {
+            color: var(--miq-text-muted);
+            font-weight: 400;
+        }
+
+        .form-floating > .form-control,
+        .form-floating > .form-select {
+            padding-top: 1.625rem;
+            padding-bottom: 0.625rem;
+        }
+
+        .form-floating > label {
+            color: var(--miq-text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label,
+        .form-floating > .form-select ~ label {
+            color: var(--miq-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+        }
+
+        .form-floating > .form-control:focus ~ label {
+            color: var(--miq-primary);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--miq-text-secondary);
+            font-size: 0.8125rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           BUTTONS
+           ═══════════════════════════════════════════════════════════ */
+
+        .btn {
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: -0.01em;
+            border-radius: var(--radius-md);
+            padding: 0.625rem 1.25rem;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--miq-primary), var(--miq-accent));
+            border: none;
+            color: white;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--miq-primary-hover), var(--miq-accent-hover));
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-light {
+            background: var(--miq-surface);
+            border: 1.5px solid var(--miq-border);
+            color: var(--miq-text-secondary);
+        }
+
+        .btn-light:hover {
+            background: var(--miq-card);
+            border-color: #CBD5E1;
+            color: var(--miq-text);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary {
+            background: var(--miq-surface);
+            border: 1.5px solid var(--miq-border);
+            color: var(--miq-text-secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #E2E8F0;
+            color: var(--miq-text);
+        }
+
+        .btn-link {
+            color: var(--miq-text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            padding: 0.5rem;
+        }
+
+        .btn-link:hover {
+            color: var(--miq-danger);
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.8125rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           PORTAL / DASHBOARD HEADER
+           ═══════════════════════════════════════════════════════════ */
+
+        #portal-view {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .portal-header {
+            animation: fadeInDown 0.5s ease forwards;
+        }
+
+        .portal-header h4 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.03em;
+            color: var(--miq-text);
+        }
+
+        .portal-header h4 i {
+            background: linear-gradient(135deg, var(--miq-primary), var(--miq-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.75rem;
+        }
+
+        #role-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.375rem 0.875rem;
+            border-radius: 100px;
+            background: var(--miq-primary-light) !important;
+            color: var(--miq-primary) !important;
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            animation: badgePop 0.4s ease forwards;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        #role-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--miq-primary);
+            border-radius: 50%;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .user-profile-card {
+            background: var(--miq-card);
+            border: 1px solid var(--miq-border);
+            border-radius: var(--radius-lg);
+            padding: 0.625rem 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-fast);
+            animation: slideInLeft 0.5s 0.1s both;
+        }
+
+        .user-profile-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        #user-display-name {
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: var(--miq-text);
+        }
+
+        #user-display-role {
+            font-size: 0.6875rem;
+            color: var(--miq-text-muted);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .user-avatar-node {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--miq-primary), var(--miq-accent));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9375rem;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+            transition: all var(--transition-fast);
+            border: 2px solid white;
+        }
+
+        .user-avatar-node:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           ANALYTICS / STATS CARDS
+           ═══════════════════════════════════════════════════════════ */
+
+        #analytics-summary-cards {
+            animation: fadeInUp 0.5s 0.15s both;
+        }
+
+        .stat-card {
+            background: var(--miq-card);
+            border: 1px solid var(--miq-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--miq-primary), var(--miq-accent));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .stat-card:hover .stat-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--miq-text);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--miq-text-muted);
+            font-weight: 500;
+        }
+
+        .stat-change {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.125rem 0.5rem;
+            border-radius: 100px;
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           NAVIGATION TABS
+           ═══════════════════════════════════════════════════════════ */
+
+        .nav-tabs {
+            border: none;
+            gap: 0.5rem;
+            animation: fadeInUp 0.4s 0.2s both;
+        }
+
+        .nav-tabs .nav-item {
+            margin: 0;
+        }
+
+        .nav-tabs .nav-link {
+            border: 1.5px solid transparent;
+            color: var(--miq-text-muted);
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            background: transparent;
+            position: relative;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: var(--miq-text-secondary);
+            background: var(--miq-surface);
+            border-color: var(--miq-border);
+        }
+
+        .nav-tabs .nav-link i {
+            font-size: 1rem;
+            transition: transform var(--transition-fast);
+        }
+
+        .nav-tabs .nav-link:hover i {
+            transform: translateY(-1px);
+        }
+
+        .nav-tabs .nav-link.active {
+            background: var(--miq-card);
+            color: var(--miq-primary);
+            border-color: var(--miq-border);
+            box-shadow: var(--shadow-sm);
+            font-weight: 700;
+        }
+
+        .nav-tabs .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--miq-primary), var(--miq-accent));
+            border-radius: 2px;
+            animation: navIndicator 0.3s ease forwards;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           SEARCH & FILTERS
+           ═══════════════════════════════════════════════════════════ */
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--miq-text-muted);
+            font-size: 0.875rem;
+            transition: color var(--transition-fast);
+            pointer-events: none;
+        }
+
+        .search-wrapper input {
+            padding-left: 2.75rem !important;
+            min-width: 260px;
+        }
+
+        .search-wrapper input:focus + i,
+        .search-wrapper input:focus ~ i {
+            color: var(--miq-primary);
+        }
+
+        .search-wrapper input:focus {
+            box-shadow: var(--shadow-glow) !important;
+        }
+
+        .filter-select {
+            min-width: 180px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           TABLES
+           ═══════════════════════════════════════════════════════════ */
+
+        .table-container {
+            border: 1px solid var(--miq-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            background: var(--miq-card);
+            animation: fadeInUp 0.4s 0.25s both;
+        }
+
+        .table {
+            background: var(--miq-card) !important;
+            margin-bottom: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table thead th {
+            font-weight: 700;
+            color: var(--miq-text-muted);
+            text-transform: uppercase;
+            font-size: 0.6875rem;
+            letter-spacing: 0.08em;
+            background: var(--miq-surface);
+            padding: 1rem 1.25rem;
+            border-bottom: 1.5px solid var(--miq-border);
+            white-space: nowrap;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .table tbody tr {
+            transition: all var(--transition-fast);
+            border-bottom: 1px solid var(--miq-border-light);
+        }
+
+        .table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .table tbody tr:hover {
+            background: rgba(37, 99, 235, 0.03) !important;
+            transform: scale(1.002);
+        }
+
+        .table td {
+            padding: 1.125rem 1.25rem;
+            color: var(--miq-text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--miq-border-light);
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tbody tr:hover td {
+            color: var(--miq-text);
+        }
+
+        .table tbody tr:hover .table-action-btn {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           STATUS BADGES
+           ═══════════════════════════════════════════════════════════ */
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 0.875rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            border: 1.5px solid transparent;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .status-operational {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+        .status-operational::before { background: #10B981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
+
+        .status-issue {
+            background: rgba(239, 68, 68, 0.1);
+            color: #DC2626;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+        .status-issue::before { background: #EF4444; box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2); }
+
+        .status-inspection {
+            background: rgba(59, 130, 246, 0.1);
+            color: #2563EB;
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+        .status-inspection::before { background: #3B82F6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+
+        .status-maintenance {
+            background: rgba(245, 158, 11, 0.1);
+            color: #D97706;
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+        .status-maintenance::before { background: #F59E0B; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2); }
+
+        .status-outofservice {
+            background: rgba(100, 116, 139, 0.1);
+            color: #475569;
+            border-color: rgba(100, 116, 139, 0.2);
+        }
+        .status-outofservice::before { background: #64748B; box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.2); }
+
+        .status-resolved {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+        .status-resolved::before { background: #10B981; }
+
+        .status-closed {
+            background: rgba(148, 163, 184, 0.1);
+            color: #64748B;
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+        .status-closed::before { background: #94A3B8; }
+
+        /* Priority badges */
+        .priority-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.6875rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .priority-critical {
+            background: linear-gradient(135deg, #EF4444, #DC2626);
+            color: white;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+        }
+
+        .priority-high {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: white;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .priority-medium {
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            color: white;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .priority-low {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           TABLE ACTION BUTTONS
+           ═══════════════════════════════════════════════════════════ */
+
+        .table-action-btn {
+            opacity: 0.7;
+            transform: translateX(-4px);
+            transition: all var(--transition-fast);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: transparent;
+            color: var(--miq-text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .table-action-btn:hover {
+            opacity: 1;
+            background: var(--miq-primary-light);
+            color: var(--miq-primary);
+            transform: translateX(0) scale(1.1);
+        }
+
+        .table-action-btn.view:hover { background: rgba(59, 130, 246, 0.1); color: #3B82F6; }
+        .table-action-btn.edit:hover { background: rgba(245, 158, 11, 0.1); color: #D97706; }
+        .table-action-btn.delete:hover { background: rgba(239, 68, 68, 0.1); color: #EF4444; }
+        .table-action-btn.qr:hover { background: rgba(37, 99, 235, 0.1); color: var(--miq-primary); }
+
+        /* ═══════════════════════════════════════════════════════════
+           MODALS
+           ═══════════════════════════════════════════════════════════ */
+
+        .modal.fade .modal-dialog {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            transform: scale(0.95) translateY(20px);
+        }
+
+        .modal.show .modal-dialog {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-backdrop {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--miq-border);
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            overflow: hidden;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--miq-primary), var(--miq-accent));
+            z-index: 1;
+        }
+
+        .modal-header {
+            border-bottom: 1.5px solid var(--miq-border-light);
+            padding: 1.5rem 1.75rem;
+            background: var(--miq-surface);
+        }
+
+        .modal-title {
+            font-weight: 800;
+            font-size: 1.125rem;
+            letter-spacing: -0.02em;
+            color: var(--miq-text);
+        }
+
+        .modal-title i {
+            background: linear-gradient(135deg, var(--miq-primary), var(--miq-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-body {
+            padding: 1.75rem;
+        }
+
+        .modal-footer {
+            border-top: 1.5px solid var(--miq-border-light);
+            padding: 1.25rem 1.75rem;
+            background: var(--miq-surface);
+            gap: 0.75rem;
+        }
+
+        .btn-close {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            background-size: 12px;
+            opacity: 0.5;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-close:hover {
+            opacity: 1;
+            background-color: var(--miq-surface);
+            transform: rotate(90deg);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           TIMELINE
+           ═══════════════════════════════════════════════════════════ */
+
+        .timeline-container {
+            border-left: 2px solid var(--miq-border);
+            padding-left: 1.5rem;
+            margin-left: 0.5rem;
+            position: relative;
+        }
+
+        .timeline-node {
+            position: relative;
+            padding-bottom: 1.5rem;
+            animation: fadeInUp 0.4s ease both;
+        }
+
+        .timeline-node:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -1.625rem;
+            top: 0.375rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--miq-primary), var(--miq-accent));
+            border: 2.5px solid white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            transition: all var(--transition-fast);
+        }
+
+        .timeline-node:hover::before {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.1);
+        }
+
+        .timeline-content {
+            background: var(--miq-card);
+            border: 1px solid var(--miq-border);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--transition-fast);
+        }
+
+        .timeline-content:hover {
+            box-shadow: var(--shadow-sm);
+            transform: translateX(4px);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           QR CODE SECTION
+           ═══════════════════════════════════════════════════════════ */
+
+        .qr-container {
+            background: linear-gradient(135deg, var(--miq-surface), var(--miq-card));
+            border: 2px dashed var(--miq-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+
+        .qr-container:hover {
+            border-color: var(--miq-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           SPINNERS & LOADING
+           ═══════════════════════════════════════════════════════════ */
+
+        .spinner-border {
+            border-width: 0.15em;
+        }
+
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+            border-width: 0.15em;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, var(--miq-surface) 25%, #E2E8F0 50%, var(--miq-surface) 75%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.5s ease-in-out infinite;
+            border-radius: var(--radius-sm);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           EMPTY STATES
+           ═══════════════════════════════════════════════════════════ */
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .empty-state-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--miq-surface);
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--miq-text-muted);
+            border: 2px dashed var(--miq-border);
+        }
+
+        .empty-state-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--miq-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-desc {
+            color: var(--miq-text-muted);
+            font-size: 0.875rem;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════ */
+
+        @media (max-width: 991.98px) {
+            .portal-header {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+
+            .search-wrapper input,
+            .filter-select {
+                width: 100% !important;
+                min-width: unset !important;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .auth-card {
+                margin: 1rem;
+                padding: 2rem 1.5rem !important;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .nav-tabs .nav-link {
+                padding: 0.625rem 1rem;
+                font-size: 0.8125rem;
+            }
+
+            .table td, .table th {
+                padding: 0.875rem 1rem;
+                font-size: 0.8125rem;
+            }
+
+            .modal-dialog {
+                margin: 0.5rem;
+            }
+
+            .modal-body, .modal-header, .modal-footer {
+                padding: 1.25rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .btn-group.auth-toggle {
+                flex-direction: column;
+            }
+
+            .btn-group.auth-toggle .btn {
+                width: 100% !important;
+                border-radius: var(--radius-sm) !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           SCROLLBAR
+           ═══════════════════════════════════════════════════════════ */
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--miq-surface);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+            border: 2px solid var(--miq-surface);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           SMOOTH SCROLL
+           ═══════════════════════════════════════════════════════════ */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           ANIMATION UTILITIES
+           ═══════════════════════════════════════════════════════════ */
+
+        .animate-fade-in {
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .animate-slide-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .animate-scale-in {
+            animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         1. AUTHENTICATION VIEW
+         ═══════════════════════════════════════════════════════════ -->
+    <div id="auth-view" class="container d-none">
+        <div class="row min-vh-100 align-items-center justify-content-center pt-5">
+            <div class="col-md-5 col-lg-4">
+                <div class="auth-card p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="auth-logo-container mx-auto mb-4">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h2 class="auth-title mb-1">MaintainIQ</h2>
+                        <p class="auth-subtitle">Enterprise Infrastructure Ledger</p>
+                    </div>
+
+                    <div class="btn-group auth-toggle w-100 mb-4">
+                        <button id="toggle-login-btn" type="button" class="btn active">Sign In</button>
+                        <button id="toggle-register-btn" type="button" class="btn">Register</button>
+                    </div>
+
+                    <form id="auth-form">
+                        <div id="register-fields" class="d-none mb-3">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="auth-name" placeholder="John Doe">
+                                <label for="auth-name">Full Identity Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="auth-role">
+                                    <option value="technician" selected>Field Operations Technician</option>
+                                    <option value="admin">System Network Administrator</option>
+                                </select>
+                                <label for="auth-role">System Access Tier Profile</label>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="auth-email" placeholder="name@example.com" required>
+                            <label for="auth-email">Organizational Email</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="auth-password" placeholder="Password" required>
+                            <label for="auth-password">Security Password Key</label>
+                        </div>
+
+                        <button class="btn btn-primary w-100 py-3 fw-bold" type="submit" id="auth-submit-btn">
+                            <span id="auth-spinner" class="spinner-border spinner-border-sm d-none me-2"></span>
+                            <span>Authenticate Session</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         2. PORTAL / DASHBOARD VIEW
+         ═══════════════════════════════════════════════════════════ -->
+    <div id="portal-view" class="container-fluid d-none py-4 px-md-4">
+
+        <!-- Header -->
+        <header class="portal-header d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between mb-4 gap-3 px-2">
+            <div>
+                <h4 class="mb-0 d-flex align-items-center gap-2">
+                    <i class="bi bi-stack"></i>
+                    MaintainIQ Operations Control
+                </h4>
+                <span id="role-badge" class="badge mt-2">Loading Privilege Matrix...</span>
+            </div>
+            <div class="d-flex align-items-center gap-3 user-profile-card">
+                <div class="text-end">
+                    <div id="user-display-name">User</div>
+                    <div id="user-display-role">Access Role</div>
+                </div>
+                <div id="user-avatar" class="user-avatar-node">U</div>
+                <button id="logout-trigger" class="btn btn-link p-2" title="Logout">
+                    <i class="bi bi-power fs-5"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Analytics Summary Cards -->
+        <div id="analytics-summary-cards" class="row g-3 mb-4 px-1"></div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs border-0 mb-3 px-1" id="portalTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="assets-tab" data-bs-toggle="tab" data-bs-target="#assets-pane" type="button">
+                    <i class="bi bi-hdd-rack me-2"></i>Assets Inventory Registry
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="issues-tab" data-bs-toggle="tab" data-bs-target="#issues-pane" type="button">
+                    <i class="bi bi-exclamation-triangle me-2"></i>Remediation Work Orders
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="portalTabsContent">
+
+            <!-- ═══════════════════════════════════════════════════
+                 PANE 1: ASSETS INVENTORY
+                 ═══════════════════════════════════════════════════ -->
+            <div class="tab-pane fade show active" id="assets-pane" role="tabpanel">
+                <div class="glass-card p-4">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+                        <div class="d-flex flex-wrap gap-2 flex-grow-1">
+                            <div class="search-wrapper">
+                                <i class="bi bi-search"></i>
+                                <input type="text" id="search-asset" class="form-control form-control-sm" placeholder="Search asset name or code...">
+                            </div>
+                            <select id="filter-asset-category" class="form-select form-select-sm filter-select"></select>
+                            <select id="filter-asset-status" class="form-select form-select-sm filter-select">
+                                <option value="">All State Metrics</option>
+                                <option value="Operational">Operational</option>
+                                <option value="Issue Reported">Issue Reported</option>
+                                <option value="Under Inspection">Under Inspection</option>
+                                <option value="Under Maintenance">Under Maintenance</option>
+                                <option value="Out of Service">Out of Service</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary btn-sm px-4 py-2 admin-action d-none" data-bs-toggle="modal" data-bs-target="#assetModal">
+                            <i class="bi bi-plus-circle me-2"></i>Provision Infrastructure Node
+                        </button>
+                    </div>
+
+                    <div class="table-responsive table-container">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Infrastructure Entity Target</th>
+                                    <th>Functional Domain & Sector</th>
+                                    <th>Operational State Metric</th>
+                                    <th>Physical Assessment</th>
+                                    <th>Target Review Forecast</th>
+                                    <th class="text-end">Inspection Registry</th>
+                                </tr>
+                            </thead>
+                            <tbody id="assets-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════
+                 PANE 2: ISSUES / WORK ORDERS
+                 ═══════════════════════════════════════════════════ -->
+            <div class="tab-pane fade" id="issues-pane" role="tabpanel">
+                <div class="glass-card p-4">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+                        <div class="d-flex flex-wrap gap-2 flex-grow-1">
+                            <div class="search-wrapper">
+                                <i class="bi bi-search"></i>
+                                <input type="text" id="search-issue" class="form-control form-control-sm" placeholder="Search active issue ticket tracking...">
+                            </div>
+                            <select id="filter-issue-priority" class="form-select form-select-sm filter-select">
+                                <option value="">All Critical Threat Priorities</option>
+                                <option value="Low">Low Priority</option>
+                                <option value="Medium">Medium Priority</option>
+                                <option value="High">High Priority Critical</option>
+                                <option value="Critical">Immediate System Danger</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive table-container">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Incident Ticket Context</th>
+                                    <th>Target Infrastructure Node</th>
+                                    <th>Threat Vector Vector</th>
+                                    <th>Workflow State Phase</th>
+                                    <th>Assigned Operations Allocation</th>
+                                    <th class="text-end">Pipeline Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="issues-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         MODAL 1: PROVISION ASSET (ADMIN ONLY)
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="assetModal" data-bs-backdrop="static" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title d-flex align-items-center gap-2">
+                        <i class="bi bi-plus-square"></i>
+                        Provision Infrastructure Node Matrix
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="asset-form">
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">System Identifier Unique Code Signature</label>
+                                <input type="text" id="asset-form-code" class="form-control" placeholder="e.g. SRV-NX-9921" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Functional Asset Label / Name</label>
+                                <input type="text" id="asset-form-name" class="form-control" placeholder="e.g. Core Database Switch Cluster" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">System Domain Classification Category</label>
+                                <input type="text" id="asset-form-category" class="form-control" placeholder="e.g. Computing Cluster Network" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Physical Facility Deployment Location</label>
+                                <input type="text" id="asset-form-location" class="form-control" placeholder="e.g. Server Room Facility Desk-A3" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Physical Structural Condition Index</label>
+                                <select id="asset-form-condition" class="form-select">
+                                    <option value="New">Brand New / Perfect Integrity Status</option>
+                                    <option value="Good" selected>Good Operational Standards</option>
+                                    <option value="Fair">Fair / Shows Clear Architectural Fatigue</option>
+                                    <option value="Poor">Poor / Structural Failure Danger</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Operational Status State Allocation</label>
+                                <select id="asset-form-status" class="form-select">
+                                    <option value="Operational" selected>Operational Status Clear</option>
+                                    <option value="Under Inspection">Under Active Technical Evaluation</option>
+                                    <option value="Out of Service">Out of Service Fault Isolation</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Service Verification Check Timestamp</label>
+                                <input type="date" id="asset-form-last-service" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Next Forecast Review Evaluation Check Target</label>
+                                <input type="date" id="asset-form-next-service" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Administrative System Logs Notes</label>
+                                <textarea id="asset-form-notes" class="form-control" rows="3" placeholder="Append engineering baseline documentation comments..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" id="save-asset-btn" class="btn btn-primary px-4 fw-bold">
+                            <span>Commit Grid Provisioning</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         MODAL 2: ASSET DETAILS & QR CODE
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="assetDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title d-flex align-items-center gap-2">
+                        <i class="bi bi-qr-code-scan"></i>
+                        Infrastructure Physical Passport Tracker Node
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-md-8">
+                            <h4 id="detail-asset-title" class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.02em;">Asset Name</h4>
+                            <span id="detail-asset-code" class="font-monospace text-muted small px-3 py-1 d-inline-block" style="background: var(--miq-surface); border-radius: var(--radius-sm); border: 1px solid var(--miq-border); font-size: 0.75rem; font-weight: 600;">ASSET-CODE</span>
+
+                            <hr class="my-4" style="border-color: var(--miq-border); opacity: 0.5;">
+
+                            <div class="row g-3 small">
+                                <div class="col-6">
+                                    <span class="text-muted d-block mb-1" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Domain Classification</span>
+                                    <strong id="detail-asset-cat" class="text-dark" style="font-size: 0.9375rem;">-</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-muted d-block mb-1" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Facility Deployment</span>
+                                    <strong id="detail-asset-loc" class="text-dark" style="font-size: 0.9375rem;">-</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-muted d-block mb-1" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Network Monitoring State</span>
+                                    <div id="detail-asset-status" class="mt-1"></div>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-muted d-block mb-1" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Physical Assessment</span>
+                                    <strong id="detail-asset-cond" class="text-uppercase text-dark" style="font-size: 0.9375rem;">-</strong>
+                                </div>
+                                <div class="col-12">
+                                    <span class="text-muted d-block mb-1" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Target Maintenance Forecast Window</span>
+                                    <strong id="detail-asset-next" class="text-dark" style="font-size: 0.9375rem;">-</strong>
+                                </div>
+                                <div class="col-12">
+                                    <span class="text-muted d-block mb-1" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Administrative Privileged Logs Context</span>
+                                    <div id="detail-asset-notes" class="p-3 font-monospace border" style="font-size:0.8rem; color:#334155; background: var(--miq-surface); border-radius: var(--radius-md); border-color: var(--miq-border) !important;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center border-start d-flex flex-column justify-content-between" style="border-color: var(--miq-border) !important;">
+                            <div class="qr-container mb-3 mx-auto w-100" style="max-width: 200px;">
+                                <div id="detail-qr-box" class="d-flex align-items-center justify-content-center" style="min-height: 160px; width: 160px;"></div>
+                            </div>
+                            <div class="d-grid gap-2 w-100">
+                                <button id="download-qr-btn" class="btn btn-sm btn-light border py-2">
+                                    <i class="bi bi-download me-2"></i>Export Passport QR
+                                </button>
+                                <button id="copy-public-link-btn" class="btn btn-sm btn-light border py-2">
+                                    <i class="bi bi-clipboard2-link me-2"></i>Copy Remote URL
+                                </button>
+                                <a id="view-public-node-btn" target="_blank" class="btn btn-sm btn-primary fw-bold py-2">
+                                    <i class="bi bi-box-arrow-up-right me-2"></i>Launch Public Node
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <h6 class="fw-bold mb-3 text-uppercase small tracking-wide text-primary d-flex align-items-center gap-2" style="letter-spacing: 0.08em; font-size: 0.75rem;">
+                                <i class="bi bi-clock-history"></i>
+                                Immutable System Transaction Auditing Timeline
+                            </h6>
+                            <div id="asset-timeline-flow" class="timeline-container" style="max-height:220px; overflow-y:auto;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm px-4 py-2" data-bs-dismiss="modal">Dismiss Passport view</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         MODAL 3: ISSUE ACTION / WORK ORDER
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="modal fade" id="issueActionModal" data-bs-backdrop="static" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title d-flex align-items-center gap-2">
+                        <i class="bi bi-shield-fill-exclamation"></i>
+                        Orchestrate Remediation Workflow
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="issue-action-form">
+                    <input type="hidden" id="action-issue-id">
+                    <input type="hidden" id="action-asset-id">
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label">Update Operational Maintenance Status</label>
+                                <select id="action-issue-status" class="form-select" required>
+                                    <option value="Reported">Ticket Received — Pending Assessment</option>
+                                    <option value="Inspection Started">Inspection Active — Physical Triage Phase</option>
+                                    <option value="Maintenance In Progress">Maintenance Active — Core Hotfix Applied</option>
+                                    <option value="Waiting for Parts">Logistics Interruption — Awaiting Components</option>
+                                    <option value="Resolved">Resolved — Validation Pass Clear</option>
+                                    <option value="Closed">Closed — Lock Workflow Records</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 admin-action d-none">
+                                <label class="form-label">Assign Qualified Field Technician Allocation</label>
+                                <select id="action-technician-assignee" class="form-select"></select>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Engineering Work Logging / Technician Notes</label>
+                                <textarea id="action-notes" class="form-control" rows="3" placeholder="Describe remediation measures taken..."></textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Actual Expenses Incurred ($)</label>
+                                <input type="number" id="action-cost" class="form-control" value="0" step="0.01">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Components Swapped</label>
+                                <input type="text" id="action-parts" class="form-control" placeholder="e.g. 500W PSU Module">
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Upload Hardware State Evidence File Image</label>
+                                <input type="file" id="action-evidence" class="form-control" accept="image/*">
+                                <small class="text-muted d-block mt-2" style="font-size:0.75rem;">Upload a live snapshot of the hardware remediation verification.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary fw-bold px-4">Synchronize Workflow State</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SCRIPT ASSETS
+         ═══════════════════════════════════════════════════════════ -->
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- QR Code Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <!-- Main App Module -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

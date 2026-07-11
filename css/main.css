@@ -1,0 +1,128 @@
+/* Core Styling Design Engine Variable Architecture */
+:root {
+    --primary-core: #0d6efd;
+    --accent-indigo: #6610f2;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(225, 230, 240, 0.8);
+    --radius-premium: 16px;
+    --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    overflow-x: hidden;
+}
+
+/* Glassmorphic Base Architectural Implementation */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-premium);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.1);
+}
+
+/* Dashboard App Modular Layer Grid Mechanics */
+.app-wrapper {
+    display: flex;
+    min-vh: 100vh;
+}
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    z-index: 1000;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        transform: translateX(-100%);
+        height: 100%;
+    }
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+.main-content-wrapper {
+    flex-grow: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation Mechanics Styling Elements */
+.sidebar-nav .nav-link {
+    color: #475569;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav .nav-link:hover, .sidebar-nav .nav-link.active {
+    background-color: rgba(13, 110, 253, 0.08);
+    color: var(--primary-core);
+}
+
+/* Unified Activity Timeline Visualization Layout */
+.timeline-stream {
+    border-left: 2px solid #e2e8f0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.timeline-node {
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.timeline-node::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-core);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+}
+
+/* Animations Structural Definitions Modules */
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Customized Responsive Controls Layout Framework overlays */
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-core);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+.skeleton-box {
+    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: loading-pulse 1.5s infinite;
+}
+
+@keyframes loading-pulse {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
