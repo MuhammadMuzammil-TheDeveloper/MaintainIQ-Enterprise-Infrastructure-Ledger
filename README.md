@@ -106,7 +106,7 @@ maintainiq/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/maintainiq.git
+git clone https://github.com/MuhammadMuzammil-TheDeveloper/MaintainIQ-Enterprise-Infrastructure-Ledger.git
 
 # 2. Navigate to the workspace
 cd maintainiq
