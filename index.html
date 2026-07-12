@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MaintainIQ — Enterprise Infrastructure Ledger</title>
     <!-- Bootstrap 5 CSS & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -1207,9 +1207,59 @@
         }
 
         /* ═══════════════════════════════════════════════════════════
-           RESPONSIVE
+           RESPONSIVE — FLUID FOUNDATIONS
            ═══════════════════════════════════════════════════════════ */
 
+        /* Fluid type scale: shrinks/grows smoothly between phone and desktop
+           instead of jumping at fixed breakpoints. */
+        html {
+            font-size: clamp(14px, 0.85rem + 0.3vw, 16px);
+        }
+
+        /* Respect notches / home-indicators on modern phones */
+        body {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        #auth-view {
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Ultra-wide desktops: keep the ledger readable instead of stretching
+           into a thin ribbon of text across a 32" monitor. */
+        @media (min-width: 1600px) {
+            #portal-view {
+                max-width: 1720px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Any pointer that can't hover (touch) shouldn't get stuck in a
+           hover state after a tap — keep interactions crisp on phones/tablets. */
+        @media (hover: none) {
+            .glass-card:hover,
+            .glass-card-elevated:hover,
+            .stat-card:hover,
+            .user-profile-card:hover,
+            .table tbody tr:hover {
+                transform: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────
+           Large tablets / small laptops
+           ───────────────────────────────────────────────────────── */
         @media (max-width: 991.98px) {
             .portal-header {
                 flex-direction: column;
@@ -1221,8 +1271,20 @@
                 width: 100% !important;
                 min-width: unset !important;
             }
+
+            .search-wrapper {
+                flex: 1 1 100%;
+            }
+
+            #analytics-summary-cards > [class*="col-"] {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
         }
 
+        /* ─────────────────────────────────────────────────────────
+           Tablets / large phones
+           ───────────────────────────────────────────────────────── */
         @media (max-width: 767.98px) {
             .auth-card {
                 margin: 1rem;
@@ -1233,14 +1295,54 @@
                 font-size: 1.5rem;
             }
 
+            .stat-card {
+                padding: 1.125rem;
+            }
+
+            .portal-header h4 {
+                font-size: 1.25rem;
+            }
+
+            .user-profile-card {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            /* Scrollable pill tabs instead of wrapped/crushed labels */
+            #portalTabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 2px;
+            }
+
+            #portalTabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            #portalTabs .nav-item {
+                flex: 0 0 auto;
+            }
+
             .nav-tabs .nav-link {
                 padding: 0.625rem 1rem;
                 font-size: 0.8125rem;
+                white-space: nowrap;
             }
 
             .table td, .table th {
                 padding: 0.875rem 1rem;
                 font-size: 0.8125rem;
+            }
+
+            /* Bigger touch targets for row-level icon actions */
+            .table-action-btn {
+                opacity: 1;
+                transform: none;
+                padding: 0.625rem;
+                font-size: 1.0625rem;
             }
 
             .modal-dialog {
@@ -1250,8 +1352,26 @@
             .modal-body, .modal-header, .modal-footer {
                 padding: 1.25rem;
             }
+
+            .modal-footer {
+                flex-wrap: wrap;
+            }
+
+            .modal-footer .btn {
+                flex: 1 1 auto;
+            }
+
+            #assetDetailsModal .col-md-4 {
+                border-left: none !important;
+                border-top: 1px solid var(--miq-border);
+                padding-top: 1.5rem;
+                margin-top: 0.5rem;
+            }
         }
 
+        /* ─────────────────────────────────────────────────────────
+           Phones
+           ───────────────────────────────────────────────────────── */
         @media (max-width: 575.98px) {
             .btn-group.auth-toggle {
                 flex-direction: column;
@@ -1261,6 +1381,85 @@
                 width: 100% !important;
                 border-radius: var(--radius-sm) !important;
             }
+
+            .auth-logo-container {
+                width: 60px;
+                height: 60px;
+            }
+
+            .auth-logo-container i {
+                font-size: 1.5rem;
+            }
+
+            .auth-title {
+                font-size: 1.5rem;
+            }
+
+            #analytics-summary-cards > [class*="col-"] {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .portal-header {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            /* Full-bleed cards and tables on very narrow screens */
+            .glass-card {
+                padding: 1rem !important;
+                border-radius: var(--radius-md);
+            }
+
+            .table-container {
+                border-radius: var(--radius-md);
+            }
+
+            .qr-container {
+                padding: 1rem;
+            }
+
+            #detail-qr-box {
+                width: 140px !important;
+                min-height: 140px !important;
+            }
+
+            .stat-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.0625rem;
+            }
+        }
+
+        /* Very small / older phones */
+        @media (max-width: 359.98px) {
+            .auth-card {
+                padding: 1.5rem 1rem !important;
+            }
+
+            .stat-value {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* ─────────────────────────────────────────────────────────
+           Landscape phones (short viewport height)
+           ───────────────────────────────────────────────────────── */
+        @media (max-height: 480px) and (orientation: landscape) {
+            #auth-view .row.min-vh-100 {
+                min-height: auto !important;
+                padding: 2rem 0;
+            }
+        }
+
+        /* Accessible focus ring across every input device */
+        .btn:focus-visible,
+        .form-control:focus-visible,
+        .form-select:focus-visible,
+        .nav-link:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--miq-primary);
+            outline-offset: 2px;
         }
 
         /* ═══════════════════════════════════════════════════════════
@@ -1509,7 +1708,7 @@
          MODAL 1: PROVISION ASSET (ADMIN ONLY)
          ═══════════════════════════════════════════════════════════ -->
     <div class="modal fade" id="assetModal" data-bs-backdrop="static" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title d-flex align-items-center gap-2">
@@ -1583,7 +1782,7 @@
          MODAL 2: ASSET DETAILS & QR CODE
          ═══════════════════════════════════════════════════════════ -->
     <div class="modal fade" id="assetDetailsModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title d-flex align-items-center gap-2">
@@ -1663,7 +1862,7 @@
          MODAL 3: ISSUE ACTION / WORK ORDER
          ═══════════════════════════════════════════════════════════ -->
     <div class="modal fade" id="issueActionModal" data-bs-backdrop="static" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title d-flex align-items-center gap-2">

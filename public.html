@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MaintainIQ — Remote Hardware Assessment Target Portal Node</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -381,6 +381,141 @@
             }
         }
 
+        /* ═══════════════ RESPONSIVE — FLUID FOUNDATIONS ═══════════════ */
+
+        /* Fluid type: scales smoothly with viewport instead of jumping
+           at fixed breakpoints. */
+        html {
+            font-size: clamp(14px, 0.85rem + 0.3vw, 16px);
+        }
+
+        /* Respect notches / home-indicators on modern phones */
+        body {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+        }
+
+        /* Ultra-wide desktops: keep the two-column report readable
+           instead of stretching thin across a 32" monitor. */
+        @media (min-width: 1700px) {
+            .horizontal-layout {
+                max-width: 1500px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Touch devices shouldn't get stuck in a hover state after a tap */
+        @media (hover: none) {
+            .glass-card:hover,
+            .meta-box:hover,
+            .meta-box-accent:hover,
+            .timeline-content:hover,
+            .status-badge:hover,
+            .ai-triage-box:hover {
+                transform: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
+
+        /* ─────────────────────────────────────────────
+           Tablets
+           ───────────────────────────────────────────── */
+        @media (max-width: 991.98px) {
+            body.py-4 { padding-top: 1.25rem !important; padding-bottom: 1.25rem !important; }
+
+            .container-fluid.px-4 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            #node-name { font-size: 1.3125rem !important; }
+        }
+
+        /* ─────────────────────────────────────────────
+           Large phones
+           ───────────────────────────────────────────── */
+        @media (max-width: 767.98px) {
+            .glass-card {
+                padding: 1.25rem !important;
+                border-radius: var(--radius-md);
+            }
+
+            #node-name { font-size: 1.1875rem !important; }
+
+            .row.g-2 .col-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .d-flex.align-items-start.justify-content-between {
+                flex-direction: column;
+            }
+
+            #node-status-container {
+                padding-top: 0 !important;
+            }
+
+            form#public-issue-form .row.g-3 .col-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .ai-triage-box, .ai-summary-box {
+                padding: 1rem;
+            }
+        }
+
+        /* ─────────────────────────────────────────────
+           Phones
+           ───────────────────────────────────────────── */
+        @media (max-width: 575.98px) {
+            .container-fluid.px-4 {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+
+            .horizontal-layout {
+                gap: 1rem;
+            }
+
+            .glass-card {
+                padding: 1rem !important;
+            }
+
+            #node-name { font-size: 1.0625rem !important; }
+
+            .d-flex.align-items-start.mb-4 > div[style*="44px"] {
+                width: 38px !important;
+                height: 38px !important;
+                font-size: 1rem !important;
+            }
+
+            .empty-state-icon {
+                width: 64px;
+                height: 64px;
+                font-size: 1.5rem;
+            }
+
+            .btn { font-size: 0.8125rem; }
+        }
+
+        /* Accessible focus ring across every input device */
+        .btn:focus-visible,
+        .form-control:focus-visible,
+        .form-select:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--miq-primary);
+            outline-offset: 2px;
+        }
+
         /* ═══════════════ ANIMATION UTILITIES ═══════════════ */
         .animate-fade-in { animation: fadeInUp 0.5s ease both; }
         .animate-scale-in { animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
@@ -465,7 +600,7 @@
                         <h6 class="fw-bold text-uppercase small text-secondary mb-0" style="letter-spacing: 0.08em; font-size: 0.6875rem;">Public Maintenance Tracking History Feed</h6>
                     </div>
                     <div id="node-public-timeline" class="pe-2" style="max-height: 300px; overflow-y:auto;"></div>
-n                </div>
+                </div>
 
             </div>
 
