@@ -6,6 +6,7 @@ import { UI } from './utils.js';
 let activeSessionProfile = null;
 let cachedAssetsStore = [];
 let cachedIssuesStore = [];
+let cachedTechnicianProfilesStore = [];
 
 // Determine context based on URL file target path string anchors
 const routingHashAnchor = window.location.pathname.split('/').pop();
@@ -97,22 +98,45 @@ async function refreshPipelineDashboardMetrics() {
     try {
         const tableBody = document.getElementById("assets-table-body");
         if (tableBody) UI.applyTableSkeleton(tableBody, 6);
-        
+
+        // Build the issues query. This is the fix for technicians seeing every
+        // ticket: previously every logged-in user (admin OR technician) ran the
+        // exact same unfiltered "select * from issues" query, so the dashboard
+        // table always contained the full issue list no matter who was signed in.
+        //
+        // NOTE: this .eq() filter is a defense-in-depth / UX convenience layer.
+        // The authoritative restriction MUST live in the Supabase RLS policy on
+        // the "issues" table (see the accompanying SQL) — otherwise a technician
+        // could still read other technicians' issues directly via the API.
+        let issuesQuery = supabase
+            .from("issues")
+            .select("*, assets(name, asset_code)")
+            .order("created_at", { ascending: false });
+
+        if (activeSessionProfile.role === "technician") {
+            issuesQuery = issuesQuery.eq("assigned_technician_id", activeSessionProfile.id);
+        }
+
         // Asynchronously fetch live snapshots
-        const [assetsResponse, issuesResponse] = await Promise.all([
+        const [assetsResponse, issuesResponse, technicianProfilesResponse] = await Promise.all([
             supabase.from("assets").select("*").order("created_at", { ascending: false }),
-            supabase.from("issues").select("*, assets(name, asset_code)").order("created_at", { ascending: false })
+            issuesQuery,
+            activeSessionProfile.role === "admin"
+                ? supabase.from("profiles").select("id, full_name").eq("role", "technician")
+                : Promise.resolve({ data: [] })
         ]);
-        
+
         cachedAssetsStore = assetsResponse.data || [];
         cachedIssuesStore = issuesResponse.data || [];
-        
+        cachedTechnicianProfilesStore = technicianProfilesResponse.data || [];
+
         // Execute operational interface updates
         buildAnalyticsSummaryCards();
         populateDomainCategoryFilters();
         renderAssetsDataMatrixTable();
         renderIssuesDataMatrixTable();
     } catch (err) {
+        console.error("refreshPipelineDashboardMetrics failure:", err);
         UI.showToast("Fatal processing exception pulling data pipelines.", "danger");
     }
 }
@@ -348,6 +372,22 @@ function setupAssetLifecycleForm() {
     });
 }
 
+function resolveAssignedTechnicianLabel(technicianId) {
+    if (!technicianId) return "Unassigned Operations Allocation";
+
+    // Admin has the full technician roster loaded; show the real name.
+    const match = cachedTechnicianProfilesStore.find(t => t.id === technicianId);
+    if (match) return `Assigned: ${match.full_name}`;
+
+    // A technician viewing their own dashboard only ever has their own issues
+    // in cachedIssuesStore (query is scoped server-side), so this is always them.
+    if (activeSessionProfile.role === "technician" && technicianId === activeSessionProfile.id) {
+        return `Assigned: ${activeSessionProfile.full_name}`;
+    }
+
+    return "Field Technician Active";
+}
+
 function renderIssuesDataMatrixTable() {
     const body = document.getElementById("issues-table-body");
     if (!body) return;
@@ -375,7 +415,7 @@ function renderIssuesDataMatrixTable() {
             <td>${issue.assets?.name || 'Unlinked Data Anchor'}</td>
             <td><span class="badge bg-danger">${issue.priority}</span></td>
             <td><span class="badge bg-secondary">${issue.status}</span></td>
-            <td><i class="bi bi-person-badge me-1"></i> ${issue.assigned_technician_id ? 'Field Technician Active' : 'Unassigned Operations Allocation'}</td>
+            <td><i class="bi bi-person-badge me-1"></i> ${resolveAssignedTechnicianLabel(issue.assigned_technician_id)}</td>
             <td class="text-end">
                 <button class="btn btn-sm btn-primary action-issue-trigger-btn" data-id="${issue.id}" data-asset="${issue.asset_id}"><i class="bi bi-gear-fill"></i> Orchestrate Pipeline</button>
             </td>
